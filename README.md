@@ -19,7 +19,7 @@ simple bash bot which converts audio files to video and uploads them to youtube
 Thats about it.
 
 # Dependencies
-youtube-upload, cewl, lynx, ffmpeg, rm, sed, echo, awk, tr, cat
+youtube-upload, cewl, lynx, ffmpeg, rm, sed, echo, awk, tr, cat, cut, sort
 
 # If you spot one or more mistakes i made, please let me know about it,
 # but for me it works so far.

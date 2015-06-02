@@ -40,7 +40,7 @@ caup() {
 	ffmpeg -i bg.jpg -vf scale=1920:1080 bghd.jpg
 	ffmpeg -i fg.jpg -vf scale=1080:1080 fghd.jpg
 	i=1
-	sed 's/>//g' ripping.log
+	sed -i 's/>//g' ripping.log
 	SAVEIFS=$IFS
 	IFS=$(echo -en "\n\b")
 	for audiofile in $(ls *.{m4a,mp3,flac,wav,ogg} 2> /dev/null )
