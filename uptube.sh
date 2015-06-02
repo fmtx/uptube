@@ -43,7 +43,7 @@ caup() {
 	sed -i 's/>//g' ripping.log
 	SAVEIFS=$IFS
 	IFS=$(echo -en "\n\b")
-	for audiofile in $(ls *.{m4a,mp3,flac,wav,ogg} 2> /dev/null )
+	for audiofile in $(ls *.{m4a,mp3,flac,wav,ogg} 2> /dev/null ) #| sed 's/ /\\ /g')
 	do
 		if [[ $(echo $audiofile | awk -F . '{print $NF}') == flac ]]
 		then
