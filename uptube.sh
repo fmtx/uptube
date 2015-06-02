@@ -24,15 +24,9 @@ kw() {
 		cewl -d0 -c -w tmp${i}.data $search
 		((i++))
 	done
-	cat tmp*.data > keywords.data; rm tmp*.data links.data
-	awk '{print $2 " " $1}' keywords.data | sort -rh | awk '{print $2}' > keywords.tmp
-	cat keywords.tmp | tr [:upper:] [:lower:] > keywords.data
-	awk '!seen[$0]++' keywords.data > keywords.tmp
-	tr -d '\n' < keywords.tmp > keywords.data
-	cut -c-419 keywords.data > keywords.tmp
-	sed 's/\w*[^,]$//' keywords.tmp > keywords.data
-	keywords=`cat keywords.data`
-	rm keywords.data keywords.tmp
+	keywords=$(cat tmp*.data | awk '{print $2 " " $1}' | sort -rh | awk '{print $2}' | tr [:upper:] [:lower:] | \
+		awk '!seen[$0]++' | tr -d '\n' | cut -c-419 | sed 's/\w*[^,]$//')
+	rm tmp*.data links.data
 }
 
 # convert to video and upload
@@ -43,7 +37,7 @@ caup() {
 	sed -i 's/>//g' ripping.log
 	SAVEIFS=$IFS
 	IFS=$(echo -en "\n\b")
-	for audiofile in $(ls *.{m4a,mp3,flac,wav,ogg} 2> /dev/null ) #| sed 's/ /\\ /g')
+	for audiofile in $(ls *.{m4a,mp3,flac,wav,ogg} 2> /dev/null)
 	do
 		if [[ $(echo $audiofile | awk -F . '{print $NF}') == flac ]]
 		then
