@@ -52,7 +52,7 @@ caup() {
 			playlst=$(youtube-upload -m $usrnme -p $psswrd --create-playlist=$(echo "'`pwd`'" | xargs basename) | sed 's/https/http/g')
 		fi
 		lnk=$(youtube-upload -m $usrnme -p $psswrd -c $ctgry -t ${audiofile%.*} --description="$(< \ripping.log)"\
-			--keywords $keywords ~/stuff/temp/${audiofile%.*}.mp4)
+			--keywords $keywords $(pwd)/${audiofile%.*}.mp4)
 		youtube-upload -m $usrnme -p $psswrd  --add-to-playlist=$playlst $lnk
 		if [[ $kvf == n || $kvf == N || $kvf == no || $kvf == No || $kvf == NO ]]
 		then
